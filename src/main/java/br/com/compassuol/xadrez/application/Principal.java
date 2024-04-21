@@ -1,11 +1,12 @@
 package br.com.compassuol.xadrez.application;
 
 import br.com.compassuol.xadrez.boardgame.Posicao;
+import br.com.compassuol.xadrez.boardgame.Tabuleiro;
 
 public class Principal {
     public static void main(String[] args) {
-        Posicao pos = new Posicao(3,4);
-        System.out.println(pos);
+        Tabuleiro tabuleiro = new Tabuleiro(8,8);
+        System.out.println(tabuleiro);
     }
 
 }
