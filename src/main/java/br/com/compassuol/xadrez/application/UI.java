@@ -30,6 +30,10 @@ public class UI {
     public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
 
 
+    public static void limparTela(){
+        System.out.print("\033[H\033[2j");
+        System.out.flush();
+    }
     public static void printTabuleiro(PecaXadrez[][] pecas){
 
         for(int i =0; i<pecas.length; i++){
@@ -62,7 +66,6 @@ public class UI {
             String s = sc.nextLine();
             char column = s.charAt(0);
             int row = Integer.parseInt(s.substring(1));
-
             return new PosicaoXadrez(column,row);
 
         }catch(RuntimeException e){

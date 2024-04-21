@@ -5,7 +5,9 @@ import br.com.compassuol.xadrez.boardgame.Tabuleiro;
 import br.com.compassuol.xadrez.xadrez.PartidaXadrez;
 import br.com.compassuol.xadrez.xadrez.PecaXadrez;
 import br.com.compassuol.xadrez.xadrez.PosicaoXadrez;
+import br.com.compassuol.xadrez.xadrez.XadrezExcecao;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Principal {
@@ -16,6 +18,8 @@ public class Principal {
 
         while(true){
 
+            try{
+            UI.limparTela();
             UI.printTabuleiro(partidaXadrez.getPecas());
             System.out.println();
             System.out.print("Buscar: ");
@@ -26,7 +30,11 @@ public class Principal {
             PosicaoXadrez encontrar = UI.lerPosicaoXadrez(sc);
 
             PecaXadrez pecaCapturada = partidaXadrez.performaceMovimentoXadrez(busca,encontrar);
+            }
+            catch (XadrezExcecao e){
+                System.out.println(e.getMessage());
+                sc.nextLine();
+            }
         }
     }
-
 }
