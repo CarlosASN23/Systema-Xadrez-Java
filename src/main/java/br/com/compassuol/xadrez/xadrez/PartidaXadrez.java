@@ -1,7 +1,9 @@
 package br.com.compassuol.xadrez.xadrez;
 
+import br.com.compassuol.xadrez.boardgame.Pecas;
 import br.com.compassuol.xadrez.boardgame.Posicao;
 import br.com.compassuol.xadrez.boardgame.Tabuleiro;
+import br.com.compassuol.xadrez.boardgame.TabuleiroExeccoes;
 import br.com.compassuol.xadrez.xadrez.peca.Rei;
 import br.com.compassuol.xadrez.xadrez.peca.Torre;
 
@@ -21,6 +23,32 @@ public class PartidaXadrez {
             }
         }
         return mat;
+    }
+
+    public PecaXadrez performaceMovimentoXadrez(PosicaoXadrez buscarPosicao, PosicaoXadrez posicaoEncontrada){
+
+        Posicao busca = buscarPosicao.toPosition();
+        Posicao encontrar = posicaoEncontrada.toPosition();
+
+        validateSourcePosition(busca);
+
+        Pecas pecaCapturada = makeMove(busca,encontrar);
+
+        return (PecaXadrez) pecaCapturada;
+    }
+
+    private Pecas makeMove(Posicao busca, Posicao encontrar){
+        Pecas p = tabuleiro.removePeca(busca);
+        Pecas pecaCapturada = tabuleiro.removePeca(encontrar);
+        tabuleiro.lugarPeca(p,encontrar);
+
+        return (PecaXadrez)pecaCapturada;
+    }
+
+    private void validateSourcePosition(Posicao posicao){
+        if (!tabuleiro.temUmaPeca(posicao)){
+            throw new TabuleiroExeccoes("Não há peças na posição buscada");
+        }
     }
 
     private void lugarNovoPeca(char column, int row, PecaXadrez peca){
