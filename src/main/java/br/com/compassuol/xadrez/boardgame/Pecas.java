@@ -1,6 +1,6 @@
 package br.com.compassuol.xadrez.boardgame;
 
-public class Pecas {
+public abstract class Pecas {
 
     // Inicialização das variaveis
     protected  Posicao posicao;
@@ -17,4 +17,21 @@ public class Pecas {
         return tabuleiro;
     }
 
+    public abstract boolean[][] movimentosPossiveis();
+
+    public boolean movimentosPossiveis(Posicao posicao){
+        return movimentosPossiveis()[posicao.getRow()][posicao.getColumn()];
+    }
+
+    public boolean temMovimentosPossiveis(){
+        boolean [][] mat = movimentosPossiveis();
+        for(int i =0; i< mat.length;i++){
+            for(int j=0; j< mat.length;j++){
+                if(mat[i][j]){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }

@@ -3,7 +3,7 @@ package br.com.compassuol.xadrez.xadrez;
 import br.com.compassuol.xadrez.boardgame.Pecas;
 import br.com.compassuol.xadrez.boardgame.Tabuleiro;
 
-public class PecaXadrez extends Pecas {
+public abstract class PecaXadrez extends Pecas {
 
     private Color color;
     public PecaXadrez(Tabuleiro tabuleiro, Color color) {
