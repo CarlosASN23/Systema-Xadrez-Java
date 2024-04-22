@@ -31,7 +31,7 @@ public class PartidaXadrez {
         Posicao encontrar = posicaoEncontrada.toPosition();
 
         validateSourcePosition(busca);
-
+        validateTargetPosition(busca,encontrar);
         Pecas pecaCapturada = makeMove(busca,encontrar);
 
         return (PecaXadrez) pecaCapturada;
@@ -43,6 +43,12 @@ public class PartidaXadrez {
         tabuleiro.lugarPeca(p,encontrar);
 
         return (PecaXadrez)pecaCapturada;
+    }
+
+    private void validateTargetPosition(Posicao busca, Posicao encontrar){
+        if (!tabuleiro.peca(busca).movimentosPossiveis(encontrar)){
+            throw new XadrezExcecao("A peça não pode mexer para a posição escolhida");
+        }
     }
 
     private void validateSourcePosition(Posicao posicao){
