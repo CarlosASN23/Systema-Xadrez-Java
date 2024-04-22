@@ -25,9 +25,16 @@ public class Principal {
             System.out.print("Buscar: ");
             PosicaoXadrez busca = UI.lerPosicaoXadrez(sc);
 
+            boolean[][] movimentosPossiveis = partidaXadrez.movimentosPossiveis(busca);
+            UI.limparTela();
+            UI.printTabuleiro(partidaXadrez.getPecas(),movimentosPossiveis);
+            System.out.println();
+            System.out.print("Encontrar: ");
+            PosicaoXadrez encontrar = UI.lerPosicaoXadrez(sc);
+
             System.out.println();
             System.out.print("Entrada: ");
-            PosicaoXadrez encontrar = UI.lerPosicaoXadrez(sc);
+            PosicaoXadrez encontra = UI.lerPosicaoXadrez(sc);
 
             PecaXadrez pecaCapturada = partidaXadrez.performaceMovimentoXadrez(busca,encontrar);
             }
