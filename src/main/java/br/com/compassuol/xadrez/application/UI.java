@@ -57,6 +57,13 @@ public class UI {
         System.out.println("  a b c d e f g h");
     }
 
+    public static void printMatch(PartidaXadrez partidaXadrez){
+        printTabuleiro(partidaXadrez.getPecas());
+        System.out.println();
+        System.out.print("Turn: " + partidaXadrez.getTurn());
+        System.out.println("Esperando jogador: " + partidaXadrez.getCurrentePlayer());
+    }
+
     private static void printPeca(PecaXadrez peca, boolean background){
 
         if(background){
