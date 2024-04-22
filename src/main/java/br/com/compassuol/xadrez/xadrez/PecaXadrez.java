@@ -6,6 +6,7 @@ import br.com.compassuol.xadrez.boardgame.Tabuleiro;
 
 public abstract class PecaXadrez extends Pecas {
 
+    private int moveCount;
     private Color color;
     public PecaXadrez(Tabuleiro tabuleiro, Color color) {
         super(tabuleiro);
@@ -23,6 +24,18 @@ public abstract class PecaXadrez extends Pecas {
 
     public PosicaoXadrez getPosicaoXadrez(){
         return PosicaoXadrez.fromPosition(posicao);
+    }
+
+    public int getMoveCount() {
+        return moveCount;
+    }
+
+    public void increaseMoveCount(){
+        moveCount++;
+    }
+
+    public void decreaseMoveCount(){
+        moveCount--;
     }
 
 }

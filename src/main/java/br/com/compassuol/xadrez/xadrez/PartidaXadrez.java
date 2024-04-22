@@ -78,7 +78,9 @@ public class PartidaXadrez {
     }
 
     private Pecas makeMove(Posicao busca, Posicao encontrar){
-        Pecas p = tabuleiro.removePeca(busca);
+
+        PecaXadrez p = (PecaXadrez)tabuleiro.removePeca(busca);
+        p.increaseMoveCount();
         Pecas pecaCapturada = tabuleiro.removePeca(encontrar);
         tabuleiro.lugarPeca(p,encontrar);
 
@@ -134,7 +136,8 @@ public class PartidaXadrez {
     }
 
     private void undoMove(Posicao busca, Posicao encontrar, Pecas pecaCapturada){
-        Pecas p = tabuleiro.removePeca(encontrar);
+        PecaXadrez p = (PecaXadrez)tabuleiro.removePeca(encontrar);
+        p.decreaseMoveCount();
         tabuleiro.lugarPeca(p,busca);
 
         if(pecaCapturada != null){
