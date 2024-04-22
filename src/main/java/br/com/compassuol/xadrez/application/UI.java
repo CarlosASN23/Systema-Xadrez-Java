@@ -67,9 +67,18 @@ public class UI {
         System.out.print("Turn: " + partidaXadrez.getTurn());
         System.out.println("Esperando jogador: " + partidaXadrez.getCurrentePlayer());
 
-        if(partidaXadrez.getCheck()){
-            System.out.println("Check!");
+        if(!partidaXadrez.getCheckMatch()){
+            System.out.println("Jogador vencedor: " + partidaXadrez.getCurrentePlayer());
+
+            if(partidaXadrez.getCheck()){
+                System.out.println("Check!");
+            }
         }
+        else{
+            System.out.println("CheckMate!");
+            System.out.println("Vencedor: " + partidaXadrez.getCurrentePlayer());
+        }
+
     }
 
     private static void printPeca(PecaXadrez peca, boolean background){

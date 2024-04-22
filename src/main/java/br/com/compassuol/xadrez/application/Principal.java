@@ -21,7 +21,7 @@ public class Principal {
         List<PecaXadrez> captured = new ArrayList<>();
 
 
-        while(true){
+        while(!partidaXadrez.getCheckMatch()){
 
             try{
             UI.limparTela();
@@ -52,5 +52,7 @@ public class Principal {
                 sc.nextLine();
             }
         }
+        UI.limparTela();
+        UI.printMatch(partidaXadrez,captured);
     }
 }

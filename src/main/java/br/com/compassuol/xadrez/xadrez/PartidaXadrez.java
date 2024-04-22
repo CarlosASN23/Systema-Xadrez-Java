@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 public class PartidaXadrez {
 
+    private boolean checkMatch;
     private boolean check;
     private int turn;
     private Color currentPlayer;
@@ -31,7 +32,7 @@ public class PartidaXadrez {
     public int getTurn(){
         return turn;
     }
-    
+
     public Color getCurrentePlayer(){
         return currentPlayer;
     }
@@ -68,7 +69,11 @@ public class PartidaXadrez {
 
         check = (testCheck(opponent(currentPlayer))) ? true : false;
 
-        nextTurn();
+        if(testCheckMatch(opponent(currentPlayer))){
+            checkMatch= true
+        }else{
+            nextTurn();
+        }
         return (PecaXadrez) pecaCapturada;
     }
 
@@ -166,6 +171,34 @@ public class PartidaXadrez {
 
     public boolean getCheck(){
         return check;
+    }
+    public boolean getCheckMatch(){
+        return checkMatch;
+    }
+
+    private boolean testCheckMatch(Color color){
+        if (!testCheck(color)){
+            return false;
+        }
+        List<Pecas>list = piecesOnBoard.stream().filter(x->((PecaXadrez)x).getColor() == color).collect(Collectors.toList());
+        for (Pecas p:list){
+            boolean [][] mat = p.movimentosPossiveis();
+            for(int i = 0; i<tabuleiro.getRow(); i++){
+                for(int j =0; j< tabuleiro.getColumn(); j++){
+                    if(mat[i][j]){
+                        Posicao busca = ((PecaXadrez)p).getPosicaoXadrez().toPosition();
+                        Posicao encontrar = new Posicao(i, j);
+                        Pecas pecaCapturada = makeMove(busca, encontrar);
+                        boolean testCheck = testCheck(color);
+                        undoMove(busca,encontrar,pecaCapturada);
+                        if(!testCheck){
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+        return true;
     }
 
 }
