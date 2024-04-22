@@ -66,6 +66,10 @@ public class UI {
         printCapturedPieces(captured);
         System.out.print("Turn: " + partidaXadrez.getTurn());
         System.out.println("Esperando jogador: " + partidaXadrez.getCurrentePlayer());
+
+        if(partidaXadrez.getCheck()){
+            System.out.println("Check!");
+        }
     }
 
     private static void printPeca(PecaXadrez peca, boolean background){
