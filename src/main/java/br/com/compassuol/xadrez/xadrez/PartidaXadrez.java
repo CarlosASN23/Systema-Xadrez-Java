@@ -7,11 +7,18 @@ import br.com.compassuol.xadrez.boardgame.TabuleiroExeccoes;
 import br.com.compassuol.xadrez.xadrez.peca.Rei;
 import br.com.compassuol.xadrez.xadrez.peca.Torre;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PartidaXadrez {
 
     private int turn;
     private Color currentPlayer;
     private Tabuleiro tabuleiro;
+    private List<Pecas> capturedpiece = new ArrayList<>();
+    private List<Pecas> piecesOnBoard = new ArrayList<>();
+
+
     public PartidaXadrez(){
         tabuleiro = new Tabuleiro(8,8);
         turn = 1;
@@ -22,6 +29,8 @@ public class PartidaXadrez {
     public int getTurn(){
         return turn;
     }
+
+
 
     public Color getCurrentePlayer(){
         return currentPlayer;
@@ -60,7 +69,11 @@ public class PartidaXadrez {
         Pecas pecaCapturada = tabuleiro.removePeca(encontrar);
         tabuleiro.lugarPeca(p,encontrar);
 
-        return (PecaXadrez)pecaCapturada;
+        if(pecaCapturada != null){
+            piecesOnBoard.remove(pecaCapturada);
+            capturedpiece.add(pecaCapturada);
+        }
+        return pecaCapturada;
     }
 
     private void validateTargetPosition(Posicao busca, Posicao encontrar){
@@ -83,6 +96,7 @@ public class PartidaXadrez {
 
     private void lugarNovoPeca(char column, int row, PecaXadrez peca){
         tabuleiro.lugarPeca(peca, new PosicaoXadrez(column, row).toPosition());
+        piecesOnBoard.add(peca);
     }
 
     private void initialSetup(){

@@ -7,7 +7,9 @@ import br.com.compassuol.xadrez.xadrez.PecaXadrez;
 import br.com.compassuol.xadrez.xadrez.PosicaoXadrez;
 import br.com.compassuol.xadrez.xadrez.XadrezExcecao;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Principal {
@@ -16,11 +18,14 @@ public class Principal {
         PartidaXadrez partidaXadrez = new PartidaXadrez();
         Scanner sc = new Scanner(System.in);
 
+        List<PecaXadrez> captured = new ArrayList<>();
+
+
         while(true){
 
             try{
             UI.limparTela();
-            UI.printMatch(partidaXadrez);
+            UI.printMatch(partidaXadrez, captured);
             System.out.println();
             System.out.print("Buscar: ");
             PosicaoXadrez busca = UI.lerPosicaoXadrez(sc);
@@ -37,6 +42,10 @@ public class Principal {
             PosicaoXadrez encontra = UI.lerPosicaoXadrez(sc);
 
             PecaXadrez pecaCapturada = partidaXadrez.performaceMovimentoXadrez(busca,encontrar);
+
+            if (pecaCapturada != null){
+                captured.add(pecaCapturada);
+                }
             }
             catch (XadrezExcecao e){
                 System.out.println(e.getMessage());
